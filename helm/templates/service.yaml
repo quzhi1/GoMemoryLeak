@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: memory-leak
+spec:
+  ports:
+    - name: "8090"
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: memory-leak
+  type: LoadBalancer
+status:
+  loadBalancer: {}

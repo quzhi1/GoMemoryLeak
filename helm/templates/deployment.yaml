@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    sidecar.speedscale.com/inject: "true"
+    sidecar.speedscale.com/tls-out: "true"
+    replay.speedscale.com/mode: "generator-only"
+  name: memory-leak
+spec:
+  selector:
+    matchLabels:
+      app: memory-leak
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: memory-leak
+    spec:
+      containers:
+        - name: memory-leak
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 300m
+              memory: 50Mi
+            requests:
+              cpu: 200m
+              memory: 50Mi
+          ports:
+            - containerPort: 8080

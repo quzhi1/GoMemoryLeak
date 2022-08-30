@@ -1,0 +1,4 @@
+name: memory-leak
+description: Example application to leak memory
+version: 0.0.1
+apiVersion: v1
