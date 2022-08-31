@@ -21,7 +21,10 @@ func main() {
 	app.Get("/hanging-go-routine", hangingGoRoutine)
 
 	// Start
-	app.Listen(":8080")
+	err := app.Listen(":8080")
+	if err != nil {
+		panic(err)
+	}
 }
 
 func health(c *fiber.Ctx) error {
